@@ -1,10 +1,10 @@
-
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的mc世界 - 我的世界博客</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>创新平台 - 连接开发者与使用者</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,410 +12,169 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #06b6d4 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #1a1a2e;
-            color: #e0e0e0;
-            line-height: 1.8;
-            min-height: 100vh;
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* 导航栏 */
         nav {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
-        }
-
-        .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(15, 23, 42, 0.95);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #4CAF50;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: "⬜";
-            font-size: 1.2rem;
-        }
-
-        .nav-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: #4CAF50;
-        }
-
-        /* 头部区域 */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem 3rem;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(76, 175, 80, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(76, 175, 80, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #4CAF50, #81C784);
+            font-weight: 900;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero p {
-            color: #888;
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .hero-date {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        /* 文章内容 */
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 2rem 5rem;
-        }
-
-        .article-header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .article-meta {
+        .nav-links {
             display: flex;
-            gap: 1.5rem;
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 1rem;
+            gap: 2.5rem;
+            list-style: none;
         }
 
-        .article-meta span {
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 通用板块样式 */
+        section {
+            min-height: 100vh;
+            padding: 120px 5% 80px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 首页 Hero */
+        #home {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-        }
-
-        .featured-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(76, 175, 80, 0.1);
-        }
-
-        .article-content h2 {
-            color: #4CAF50;
-            font-size: 1.6rem;
-            margin: 2.5rem 0 1rem;
-            font-weight: 600;
-        }
-
-        .article-content h3 {
-            color: #81C784;
-            font-size: 1.2rem;
-            margin: 2rem 0 0.8rem;
-            font-weight: 500;
-        }
-
-        .article-content p {
-            margin-bottom: 1.2rem;
-            color: #c0c0c0;
-            font-size: 1.05rem;
-        }
-
-        .article-content blockquote {
-            border-left: 4px solid #4CAF50;
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-            background: rgba(76, 175, 80, 0.05);
-            border-radius: 0 8px 8px 0;
-            font-style: italic;
-            color: #a0a0a0;
-        }
-
-        .highlight-box {
-            background: rgba(76, 175, 80, 0.08);
-            border: 1px solid rgba(76, 175, 80, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .highlight-box h4 {
-            color: #4CAF50;
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-        }
-
-        .highlight-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .highlight-box li {
-            padding: 0.4rem 0;
-            padding-left: 1.5rem;
+            justify-content: center;
+            text-align: center;
             position: relative;
-            color: #c0c0c0;
+            overflow: hidden;
         }
 
-        .highlight-box li::before {
-            content: "▸";
+        .hero-bg {
             position: absolute;
+            top: 0;
             left: 0;
-            color: #4CAF50;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            z-index: 0;
         }
 
-        .screenshot-placeholder {
-            background: #0f0f23;
-            border: 2px dashed rgba(76, 175, 80, 0.3);
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin: 2rem 0;
-            color: #666;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
         }
 
-        .screenshot-placeholder .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* 标签 */
-        .tags {
-            display: flex;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
             gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .tag {
-            background: rgba(76, 175, 80, 0.15);
-            color: #81C784;
-            padding: 0.3rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            cursor: default;
-        }
-
-        .tag:hover {
-            background: rgba(76, 175, 80, 0.25);
-        }
-
-        /* 页脚 */
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: #0f0f23;
-            color: #666;
+            padding: 0.5rem 1.2rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.03);
-        }
-
-        footer a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        /* 响应式 */
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .article-container {
-                padding: 2rem 1.5rem;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-
-        /* 动画 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .article-container {
-            animation: fadeIn 0.8s ease-out;
-        }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="nav-container">
-            <div class="logo">mc 世界</div>
-            <div class="nav-links">
-                <a href="#">首页</a>
-                <a href="#">文章</a>
-                <a href="#">关于</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <h1>我的mc世界</h1>
-            <p>在像素与无限之间，找到属于自己的乐园</p>
-            <div class="hero-date">写于2026年6月14日，By 予渊Ryan</div>
-        </div>
-    </header>
-
-    <main class="article-container">
-        <article>
-            <div class="article-header">
-                <h1 style="font-size: 2rem; color: #fff; margin-bottom: 0.5rem;">为什么我爱《我的世界》</h1>
-                <div class="article-meta">
-                    <span>✍️ 作者：予渊Ryan</span>
-                    <span>📂 游戏随笔</span>
-                    <span>⏱️ 阅读约 5 分钟</span>
-                </div>
-            </div>
-
-            <div class="article-content">
-                <h2>初识方块世界</h2>
-                <p>
-                    第一次打开《我的世界》的时候，我被眼前这个由方块构成的世界深深震撼了。没有华丽的过场动画，没有复杂的剧情引导，只有一个简单的提示：「按 W A S D 移动」。就是这样一个看似简陋的开端，却开启了我长达数年的奇妙旅程。
-                </p>
-                <p>
-                    在那个下午，我在一片陌生的草原上醒来，周围是随风摇曳的草丛和远处起伏的山丘。太阳缓缓升起，阳光洒在方块化的树叶上，投下斑驳的影子。我不知道该做什么，于是开始漫无目的地走着——砍树、挖土、追逐一只路过的鸡。那一刻，我意识到：这个世界没有规则，只有无限的可能。
-                </p>
-
-                <blockquote>
-                    "在《我的世界》里，你不是在玩游戏，你是在创造另一个版本的自己。"
-                </blockquote>
-
-                <h2>创造的快乐</h2>
-                <p>
-                    有人说《我的世界》是一个生存游戏，也有人说它是一个建造游戏。但对我来说，它更像是一个数字化的乐高世界，一个可以让我把脑海中任何想象变为现实的地方。
-                </p>
-                <p>
-                    我记得第一次成功建造出一座像样的小屋时的兴奋。那是一座坐落在山坡上的木质房子，有一个小小的阳台，可以俯瞰整片森林。虽然它很简陋，墙壁不够平整，屋顶甚至有些歪斜，但当我站在阳台上看着夕阳西下，那种成就感是任何其他游戏都无法给予的。
-                </p>
-
-                <div class="highlight-box">
-                    <h4>我最爱的游戏模式</h4>
-                    <ul>
-                        <li><strong>生存模式</strong> — 从零开始，体验收集资源、对抗怪物的紧张刺激</li>
-                        <li><strong>创造模式</strong> — 拥有无限资源，专注于建筑和创意设计</li>
-                        <li><strong>多人联机</strong> — 和朋友们一起建造属于我们的世界</li>
-                        <li><strong>红石工程</strong> — 用电路逻辑创造自动化装置，感受编程般的乐趣</li>
-                    </ul>
-                </div>
-
-                <h2>那些难忘的瞬间</h2>
-                <h3>第一次下矿</h3>
-                <p>
-                    第一次鼓起勇气深入地下矿洞时，我紧张得手心冒汗。火把的光只能照亮周围几格方块，黑暗中传来僵尸的呻吟和骷髅的咔哒声。当我终于在深处发现一片闪闪发光的钻石矿时，那种喜悦简直无法形容——就像真正的探险家发现了宝藏。
-                </p>
-
-                <h3>与朋友的冒险</h3>
-                <p>
-                    最难忘的是和几个朋友一起联机的日子。我们一起建造了一座巨大的城堡，有人负责挖矿，有人负责种地，有人专门研究红石机关。晚上我们一起抵御僵尸和苦力怕的袭击，白天则各自忙碌。那感觉就像是在经营一个小小的社区，每个人都在为共同的目标努力。
-                </p>
-
-                <h3>建造奇迹</h3>
-                <p>
-                    后来我开始尝试更大规模的建筑项目。我花了一个周末建造了一座中式庭院，有假山、池塘和长廊。虽然过程很漫长，但当最后一块方块放置到位，看着夕阳下的庭院时，所有的辛苦都值得了。《我的世界》教会了我耐心，也教会了我：伟大的作品，都是由一个个小小的方块堆砌而成的。
-                </p>
-
-                <h2>不只是游戏</h2>
-                <p>
-                    随着玩得越来越深入，我发现《我的世界》远不止是一个娱乐工具。它是一个学习平台——通过红石电路，我理解了基本的逻辑门和电路原理；通过建造，我学会了空间规划和美学设计；通过生存模式，我体会到了资源管理和规划的重要性。
-                </p>
-                <p>
-                    更重要的是，它给了我一个可以放松的心灵栖息地。当现实世界的压力让我喘不过气时，我会打开游戏，在那个安静的方块世界里种一片花田，或者只是坐在海边看日出。没有任务催促，没有排名竞争，只有我和这个世界。
-                </p>
-
-                <blockquote>
-                    "在这个世界里，失败并不可怕。死了可以重生，房子毁了可以重建。重要的是，你始终拥有重新开始的勇气。"
-                </blockquote>
-
-                <h2>写在最后</h2>
-                <p>
-                    有人问我：「你玩了这么久《我的世界》，不腻吗？」我想了想，回答说：「一个世界怎么可能腻呢？每次新开一个存档，都是一次全新的冒险。」
-                </p>
-                <p>
-                    从最初那个在草原上迷路的新手，到现在能够建造复杂建筑的「老玩家」，《我的世界》陪伴我度过了无数个日夜。它不仅仅是一款游戏，更是我青春记忆的一部分，是我创造力的试验场，是我在数字世界中的第二个家。
-                </p>
-                <p>
-                    如果你还没有尝试过这款游戏，我真诚地推荐你打开它。也许一开始你会觉得画面简单、不知所措，但相信我，当你挖到第一颗钻石、建造出第一座房子、看到第一个日出时，你就会明白——为什么 millions of players 都爱这个方块世界。
-                </p>
-                <p style="font-size: 1.1rem; color: #4CAF50; font-weight: 500;">
-                    欢迎来到我的世界。🌟
-                </p>
-            </div>
-
-            <div class="tags">
-                <span class="tag">Minecraft</span>
-                <span class="tag">我的世界</span>
-                <span class="tag">游戏随笔</span>
-                <span class="tag">沙盒游戏</span>
-                <span class="tag">创造</span>
-                <span class="tag">像素艺术</span>
-            </div>
-        </article>
-    </main>
-
-    <footer>
-        <p>© 2026 方块世界博客 | 用 ❤️ 和 ⬜ 方块建造 作者b站主页https://b23.tv/Nd7dP2f</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by Minecraft Spirit</p>
-    </footer>
-
-</body>
-</html>'''
-
-
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ea
